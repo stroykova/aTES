@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="uNnZSbMdCMKl7JxBLD7i" name="Page-1">
-        <mxGraphModel dx="553" dy="1533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1730" dy="1533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -31,14 +31,18 @@
                 <mxCell id="14" value="Task&lt;br&gt;&amp;nbsp;created" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
                     <mxGeometry x="510" y="-220" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="" style="edgeStyle=none;html=1;" parent="1" source="15" target="66" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="67" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="15" target="69" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" y="-90" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="15" value="Tasks reassigned" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
                     <mxGeometry x="510" y="-130" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="" style="edgeStyle=none;html=1;" parent="1" source="16" target="72" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="73" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="16" target="75" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="16" value="Task done" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
                     <mxGeometry x="510" y="-40" width="80" height="80" as="geometry"/>
@@ -46,17 +50,8 @@
                 <mxCell id="18" value="Task cost calculated" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
                     <mxGeometry x="710" y="-220" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="" style="edgeStyle=none;html=1;" parent="1" source="19" target="69" edge="1">
+                <mxCell id="84" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="21" target="52">
                     <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="19" value="Money charged" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
-                    <mxGeometry x="710" y="-130" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="76" value="" style="edgeStyle=none;html=1;" parent="1" source="20" target="75" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="20" value="Money credited" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
-                    <mxGeometry x="710" y="-40" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="Daily earnings calculated" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
                     <mxGeometry x="510" y="50" width="80" height="80" as="geometry"/>
@@ -97,17 +92,11 @@
                 <mxCell id="32" value="&lt;font color=&quot;#000000&quot;&gt;Create task&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="-220" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="&lt;font color=&quot;#000000&quot;&gt;All parrots in a system&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="-220" width="80" height="80" as="geometry"/>
-                </mxCell>
                 <mxCell id="34" value="Manager&lt;br&gt;/&lt;br&gt;Admin" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
                     <mxGeometry x="350" y="-130" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="&lt;font color=&quot;#000000&quot;&gt;Reassign tasks&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="-130" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="36" value="&lt;font color=&quot;#000000&quot;&gt;All parrots in a system&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="-130" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="Parrot" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
                     <mxGeometry x="350" y="-40" width="80" height="80" as="geometry"/>
@@ -116,10 +105,10 @@
                     <mxGeometry x="430" y="-40" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="39" value="Audit log updated - reassign (charge)" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
-                    <mxGeometry x="910" y="-130" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="710" y="-130" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" value="Audit log updated - done (credit)" style="whiteSpace=wrap;html=1;aspect=fixed;fontColor=#000000;fillColor=#fa6800;strokeColor=#C73500;" parent="1" vertex="1">
-                    <mxGeometry x="910" y="-40" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="710" y="-40" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="41" value="Cron job" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
                     <mxGeometry x="350" y="320" width="80" height="80" as="geometry"/>
@@ -130,14 +119,8 @@
                 <mxCell id="43" value="Cron job" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
                     <mxGeometry x="350" y="410" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Done audit records for a day/week/month&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="230" width="80" height="80" as="geometry"/>
-                </mxCell>
                 <mxCell id="45" value="&lt;font color=&quot;#000000&quot;&gt;Find most expensive task for a day/week/month&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="230" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="46" value="&lt;font color=&quot;#000000&quot;&gt;All done and reassigned audit records for a day&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="320" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="47" value="&lt;font color=&quot;#000000&quot;&gt;Calculate management earnings for a day&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="320" width="80" height="80" as="geometry"/>
@@ -148,32 +131,20 @@
                 <mxCell id="49" value="&lt;font color=&quot;#000000&quot;&gt;Calculate each parrot earnings for a day&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="50" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;All done and reassigned audit records for a day&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="50" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="51" value="&lt;font color=&quot;#000000&quot;&gt;All parrots in a system, all audit records (or audit records after last payment)&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="410" width="80" height="80" as="geometry"/>
-                </mxCell>
                 <mxCell id="52" value="&lt;font color=&quot;#000000&quot;&gt;balance and daily earnings&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(audit records after last payment)&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" parent="1" vertex="1">
                     <mxGeometry x="630" y="50" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="54" value="&lt;font color=&quot;#000000&quot;&gt;Calculate&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;negative balance parrots count&lt;/span&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp;for a day&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="430" y="410" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="&lt;font color=&quot;#000000&quot;&gt;Create task&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
+                <mxCell id="55" value="&lt;font color=&quot;#000000&quot;&gt;calculate task cost&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="630" y="-220" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="&lt;font color=&quot;#000000&quot;&gt;charge money&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
+                <mxCell id="69" value="&lt;font color=&quot;#000000&quot;&gt;update audit log&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="630" y="-130" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="&lt;font color=&quot;#000000&quot;&gt;update audit log&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
-                    <mxGeometry x="830" y="-130" width="80" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="72" value="&lt;font color=&quot;#000000&quot;&gt;credit money&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
-                    <mxGeometry x="630" y="-40" width="80" height="80" as="geometry"/>
-                </mxCell>
                 <mxCell id="75" value="&lt;font color=&quot;#000000&quot;&gt;update audit log&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
-                    <mxGeometry x="830" y="-40" width="80" height="80" as="geometry"/>
+                    <mxGeometry x="630" y="-40" width="80" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="78" value="&lt;font color=&quot;#000000&quot;&gt;make payment&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="710" y="50" width="80" height="80" as="geometry"/>
@@ -184,7 +155,7 @@
                 <mxCell id="81" value="&lt;font color=&quot;#000000&quot;&gt;send report email&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;" parent="1" vertex="1">
                     <mxGeometry x="910" y="140" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="83" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;External auth&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcccc;strokeColor=#36393d;" vertex="1" parent="1">
+                <mxCell id="83" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;External auth&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffcccc;strokeColor=#36393d;" parent="1" vertex="1">
                     <mxGeometry x="430" y="-400" width="80" height="80" as="geometry"/>
                 </mxCell>
             </root>
