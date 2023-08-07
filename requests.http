@@ -12,8 +12,8 @@ curl http://127.0.0.1:8000/docs
 curl -X 'GET' \
   'http://127.0.0.1:8000/users/me' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer johndoe'
-  
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNDM5MjI5fQ.vs6zwi_lMAR-E_4nUBXWg4Vyib8sCYrwF4tmmlvweuo'
+
 ### 
 
 curl -X 'POST' \

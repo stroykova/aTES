@@ -1,4 +1,8 @@
-from main import con
+from main import con, pwd_context
+
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
 
 
 def table_exists(table_name):
@@ -14,12 +18,7 @@ def get_user(username: str):
     
 
 if __name__ == '__main__':
-    
-    cur = con.cursor()
-    res = cur.execute(f"SELECT * FROM users")
-    print(res.fetchall())
-
-
+   
     cur = con.cursor()
 
     table_name = 'users'
@@ -30,7 +29,8 @@ if __name__ == '__main__':
         cur.execute(statement)
 
     if not get_user('johndoe'):
-        statement = f"insert into {table_name} values ('johndoe', 'fakehashedsecret')"
+        password = get_password_hash('secret')
+        statement = f"insert into {table_name} values ('johndoe', '{password}')"
         cur.execute(statement)
 
     cur = con.cursor()
