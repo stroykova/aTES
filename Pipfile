@@ -9,6 +9,8 @@ uvicorn = "*"
 python-multipart = "*"
 python-jose = "*"
 passlib = "*"
+authlib = "*"
+requests = "*"
 
 [dev-packages]
 

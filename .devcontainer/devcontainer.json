@@ -16,7 +16,7 @@
 				"jock.svg"
 			],
 			"settings": {
-				"python.venvPath": "./.venv"
+				"python.venvPath": "/workspaces/aTES/.venv"
 			}
 		}
 	}

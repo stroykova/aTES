@@ -1,23 +1,41 @@
 
-###
+### sso url
 
 curl http://127.0.0.1:8000/
 
-###
+### sso docs
 
 curl http://127.0.0.1:8000/docs
 
-###
+### sso check
 
 curl -X 'GET' \
   'http://127.0.0.1:8000/users/me' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNDM5MjI5fQ.vs6zwi_lMAR-E_4nUBXWg4Vyib8sCYrwF4tmmlvweuo'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNjE2MjgwfQ.Z959TM9YMJZICiFXaMehWYnrT_dLtEgTTkwSG0f5pJE'
 
-### 
+### sso get token
 
 curl -X 'POST' \
   'http://127.0.0.1:8000/token' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=&username=johndoe&password=secret&scope=&client_id=&client_secret='
+
+
+### tasks get token
+
+curl -X 'POST' \
+  'http://127.0.0.1:8001/login' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'grant_type=&username=johndoe&password=secret&scope=&client_id=&client_secret='
+
+### tasks list
+
+curl -X 'GET' \
+  'http://127.0.0.1:8001/tasks' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNjE4MjQ0fQ.Bqznry9_cainMYc8W_pTI90oHexL4qNQ0HSLoDoRx-c'
+
+

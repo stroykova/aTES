@@ -17,16 +17,22 @@ def get_user(username: str):
     return res.fetchone()
     
 
+def create_table(table_name, fields):
+    cur = con.cursor()
+    if not table_exists(table_name):
+        statement = f"CREATE TABLE {table_name}({', '.join(fields)})"
+        print(statement)
+        cur.execute(statement)
+    con.commit()
+
+
+
 if __name__ == '__main__':
    
     cur = con.cursor()
 
     table_name = 'users'
-    fields = ('username', 'hashed_password')
-    if not table_exists(table_name):
-        statement = f"CREATE TABLE {table_name}({', '.join(fields)})"
-        print(statement)
-        cur.execute(statement)
+    create_table(table_name, ('username', 'hashed_password'))
 
     if not get_user('johndoe'):
         password = get_password_hash('secret')

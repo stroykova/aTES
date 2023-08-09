@@ -1,0 +1,25 @@
+version: '3'
+services:
+  sso:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./services/sso:/usr/src/services/sso
+      - ./.venv:/usr/src/.venv
+    working_dir: /usr/src/
+    command: bash -c "cd services/sso && pipenv run python init_db.py && pipenv run python -m uvicorn main:app --host 0.0.0.0 --reload"
+    ports:
+      - 8000:8000
+  
+  tasks:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./services/tasks:/usr/src/services/tasks
+      - ./.venv:/usr/src/.venv
+    working_dir: /usr/src/
+    command: bash -c "cd services/tasks && pipenv run python init_db.py && pipenv run python -m uvicorn main:app --host 0.0.0.0 --reload"
+    ports:
+      - 8001:8000

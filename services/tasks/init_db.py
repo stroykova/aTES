@@ -16,8 +16,13 @@ def create_table(table_name, fields):
     con.commit()
 
 
-
 if __name__ == '__main__':
     
     cur = con.cursor()
-    create_table('default_table', ('f1', 'f2'))
+
+    create_table('users', ('username',))
+    create_table('tasks', ('description', 'assignee', 'initial_cost', 'done_cost'))
+    
+    statement = f"insert into tasks values ('mytask', 'johndoe', 10, 20)"
+    cur.execute(statement)
+    con.commit()
