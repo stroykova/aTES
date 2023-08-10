@@ -20,9 +20,21 @@ if __name__ == '__main__':
     
     cur = con.cursor()
 
-    create_table('users', ('username',))
+    create_table('users', ('username', 'role'))
     create_table('tasks', ('description', 'assignee', 'initial_cost', 'done_cost'))
     
-    statement = f"insert into tasks values ('mytask', 'johndoe', 10, 20)"
-    cur.execute(statement)
+    tasks = [
+        ('mytask', 'johndoe', 10, 20),
+        ('mytask', 'johndoe', 15, 30),
+        ('mytask', 'johndoe2', 1, 1),
+        ('mytask', 'johndoe2', 2, 2),
+
+    ]
+    count = cur.execute('select count(*) from tasks').fetchone()[0]
+    print(count)
+    if not count:
+        for t in tasks:
+            statement = f"insert into tasks values ('{t[0]}', '{t[1]}', {t[2]}, {t[3]})"
+            cur.execute(statement)
+
     con.commit()

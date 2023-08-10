@@ -42,6 +42,7 @@ def authenticate_user(username: str, password: str):
 
 class User(BaseModel):
     username: str
+    role: str
 
 
 class UserInDB(User):
@@ -55,14 +56,15 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+    role: str | None = None
 
 
 def get_user(username: str):
     cur = con.cursor()
-    res = cur.execute(f"SELECT username, hashed_password FROM users WHERE username='{username}'")
+    res = cur.execute(f"SELECT username, hashed_password, role FROM users WHERE username='{username}'")
     result = res.fetchone()
     if result:
-        return UserInDB(username=result[0], hashed_password=result[1])
+        return UserInDB(username=result[0], hashed_password=result[1], role=result[2])
     
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
@@ -85,9 +87,11 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
+        role: str = payload.get("role")
+        if username is None or role is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        
+        token_data = TokenData(username=username, role=role)
     except JWTError:
         raise credentials_exception
     user = get_user(username=token_data.username)
@@ -110,7 +114,7 @@ async def login_for_access_token(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username, "role": user.role}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 

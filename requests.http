@@ -1,32 +1,32 @@
 
 ### sso url
 
-curl http://127.0.0.1:8000/
+curl http://sso:8000/
 
 ### sso docs
 
-curl http://127.0.0.1:8000/docs
+curl http://sso:8000/docs
 
-### sso check
-
-curl -X 'GET' \
-  'http://127.0.0.1:8000/users/me' \
-  -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNjE2MjgwfQ.Z959TM9YMJZICiFXaMehWYnrT_dLtEgTTkwSG0f5pJE'
 
 ### sso get token
 
 curl -X 'POST' \
-  'http://127.0.0.1:8000/token' \
+  'http://sso:8000/token' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=&username=johndoe&password=secret&scope=&client_id=&client_secret='
 
+### sso check
+
+curl -X 'GET' \
+  'http://sso:8000/users/me' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MTY3Mjg1MX0.akNbolNgV4F9zcvWSttiCTxVemS_8dZb9nXT0y16B14'
 
 ### tasks get token
 
 curl -X 'POST' \
-  'http://127.0.0.1:8001/login' \
+  'http://tasks:8000/login' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=&username=johndoe&password=secret&scope=&client_id=&client_secret='
@@ -34,8 +34,22 @@ curl -X 'POST' \
 ### tasks list
 
 curl -X 'GET' \
-  'http://127.0.0.1:8001/tasks' \
+  'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNjkxNjE4MjQ0fQ.Bqznry9_cainMYc8W_pTI90oHexL4qNQ0HSLoDoRx-c'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MTY3Mjg3MX0.4xUItrWjdvoKeJSWWLLMLwNqC_UgnqW_b9t_BzWv8o8'
+
+### manager get token
+
+curl -X 'POST' \
+  'http://tasks:8000/login' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'grant_type=&username=manager&password=secret&scope=&client_id=&client_secret='
 
 
+### manager get tasks
+
+curl -X 'GET' \
+  'http://tasks:8000/tasks' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE2NzM2ODV9.mzYTXW6LKeN28BsLB5C3I5vzLXCqYkw0BJqyC26ko1M'

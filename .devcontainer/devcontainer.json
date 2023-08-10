@@ -3,7 +3,6 @@
 {
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 
-	"build":{"dockerfile": "../Dockerfile"},
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -16,26 +15,13 @@
 				"jock.svg"
 			],
 			"settings": {
-				"python.venvPath": "/workspaces/aTES/.venv"
+				"python.venvPath": "/usr/src/.venv"
 			}
 		}
-	}
+	},
+	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+    "service": "devcontainer",
+    "workspaceFolder": "/usr/src/",
 
-
-	// Use this environment variable if you need to bind mount your local source code into a new container.
-	// "remoteEnv": {
-	// 	"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-	// },
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "docker --version",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "default"
+	"remoteUser": "default"
 }

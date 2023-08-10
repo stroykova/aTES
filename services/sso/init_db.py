@@ -26,24 +26,26 @@ def create_table(table_name, fields):
     con.commit()
 
 
+users = [
+    ('johndoe', get_password_hash('secret'), 'parrot'),
+    ('johndoe2', get_password_hash('secret'), 'parrot'),
+    ('manager', get_password_hash('secret'), 'manager'),
+]
+
 
 if __name__ == '__main__':
    
     cur = con.cursor()
 
     table_name = 'users'
-    create_table(table_name, ('username', 'hashed_password'))
+    create_table(table_name, ('username', 'hashed_password', 'role'))
 
     if not get_user('johndoe'):
-        password = get_password_hash('secret')
-        statement = f"insert into {table_name} values ('johndoe', '{password}')"
-        cur.execute(statement)
+        for u in users:
+            statement = f"insert into {table_name} values ('{u[0]}', '{u[1]}', '{u[2]}')"
+            cur.execute(statement)
 
     cur = con.cursor()
     res = cur.execute(f"SELECT * FROM users")
     print(res.fetchall())
-
-    res = cur.execute("SELECT username, hashed_password FROM users WHERE username='johndoe'")
-    result = res.fetchone()
-    print(result)
     con.commit()  

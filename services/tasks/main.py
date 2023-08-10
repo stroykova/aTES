@@ -20,10 +20,12 @@ con = sqlite3.connect(DB_NAME)
 
 class User(BaseModel):
     username: str
+    role: str
 
 
 class TokenData(BaseModel):
     username: str | None = None
+    role: str | None = None
 
 class Task(BaseModel):
     description: str
@@ -33,15 +35,15 @@ class Task(BaseModel):
 
 def get_user(username: str):
     cur = con.cursor()
-    res = cur.execute(f"SELECT username FROM users WHERE username='{username}'")
+    res = cur.execute(f"SELECT username, role FROM users WHERE username='{username}'")
     result = res.fetchone()
     if result:
-        return User(username=result[0])
+        return User(username=result[0], role=result[1])
     
 
 def create_user(user: User):
     cur = con.cursor()
-    cur.execute(f"insert into users values ('{user.__hash__username}')")
+    cur.execute(f"insert into users values ('{user.username}', '{user.role}')")
     con.commit()
 
 
@@ -56,15 +58,16 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
+        role: str = payload.get("role")
+        if username is None or role is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        token_data = TokenData(username=username, role=role)
     except JWTError:
         raise credentials_exception
     print(token_data)
     user = get_user(username=token_data.username)
     if user is None:
-        user = User(username=token_data.username)
+        user = User(username=token_data.username, role=token_data.role)
         create_user(user)
     return user
 
@@ -81,7 +84,11 @@ async def tasks(
     current_user: Annotated[User, Depends(get_current_user)]
 ):
     cur = con.cursor()
-    res = cur.execute(f"SELECT * FROM tasks WHERE assignee='{current_user.username}'")
+    if current_user.role == 'parrot':
+        statement = f"SELECT * FROM tasks WHERE assignee='{current_user.username}'"
+    else:
+        statement = f"SELECT * FROM tasks"
+    res = cur.execute(statement)
     result = res.fetchall()
     return [Task(description=r[0], assignee=r[1], initial_cost=r[2], done_cost=r[3]) for r in result]
     

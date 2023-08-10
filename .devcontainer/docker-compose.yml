@@ -1,0 +1,9 @@
+version: '3'
+services:
+  devcontainer: 
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/:cached
+    command: sleep infinity
