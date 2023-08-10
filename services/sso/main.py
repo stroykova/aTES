@@ -7,7 +7,11 @@ from pydantic import BaseModel
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
+from kafka import KafkaProducer
+import json
 
+
+producer = KafkaProducer(bootstrap_servers=['kafka:29092', 'kafka2:29093'], api_version=(0, 10, 1))
 
 SERVICE = 'sso'
 DB_NAME = f"{SERVICE}.db"
@@ -23,6 +27,12 @@ con = sqlite3.connect(DB_NAME)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def event(topic, data):
+    print('send event:', topic, data)
+    producer.send(topic, json.dumps(data).encode('utf-8'))
+    producer.flush()
 
 
 def verify_password(plain_password, hashed_password):
@@ -75,6 +85,8 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
         expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    event('new_jwt_token', to_encode)
     return encoded_jwt
 
 

@@ -11,6 +11,7 @@ python-jose = "*"
 passlib = "*"
 authlib = "*"
 requests = "*"
+kafka-python = "*"
 
 [dev-packages]
 

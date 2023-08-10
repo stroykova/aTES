@@ -53,3 +53,8 @@ curl -X 'GET' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE2NzM2ODV9.mzYTXW6LKeN28BsLB5C3I5vzLXCqYkw0BJqyC26ko1M'
+
+
+### kafka UI
+
+curl http://localhost:8090/
