@@ -59,6 +59,10 @@ class UserInDB(User):
     hashed_password: str
 
 
+class UserRegister(User):
+    password: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -86,6 +90,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
+    # test event
     event('new_jwt_token', to_encode)
     return encoded_jwt
 
@@ -136,3 +141,16 @@ async def read_users_me(
     current_user: Annotated[User, Depends(get_current_user)]
 ):
     return current_user
+
+
+@app.post("/register")
+async def register(u: UserRegister):
+    statement = f"insert into users values ('{u.username}', '{u.password}', '{u.role}')"
+    cur = con.cursor()
+    cur.execute(statement)
+    con.commit()
+    event('accounts_stream', {
+        'event_name': 'AccountCreated',
+        'data': dict(User(username=u.username, role=u.role)),
+    })
+    return 'ok'

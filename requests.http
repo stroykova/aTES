@@ -58,3 +58,12 @@ curl -X 'GET' \
 ### kafka UI
 
 curl http://localhost:8090/
+
+
+### register new user
+
+curl -X 'POST' \
+  'http://sso:8000/register' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"1wws1qjod2snde2z","password":"secret","role":"parrot"}'

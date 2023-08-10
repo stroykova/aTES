@@ -1,6 +1,8 @@
 FROM python:3.11
 
 ENV PIPENV_VENV_IN_PROJECT=1
+ENV PYTHONUNBUFFERED=1
+
 
 RUN pip install -U pip pipenv
 

@@ -24,6 +24,16 @@ services:
     ports:
       - 8001:8000
 
+  tasks_consumer:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./services/tasks:/usr/src/services/tasks
+      - ./.venv:/usr/src/.venv
+    working_dir: /usr/src/
+    command: bash -c "cd services/tasks && pipenv run python consumer.py"
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:

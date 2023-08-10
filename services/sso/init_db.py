@@ -17,10 +17,10 @@ def get_user(username: str):
     return res.fetchone()
     
 
-def create_table(table_name, fields):
+def create_table(table_name, fields, additional=''):
     cur = con.cursor()
     if not table_exists(table_name):
-        statement = f"CREATE TABLE {table_name}({', '.join(fields)})"
+        statement = f"CREATE TABLE {table_name}({', '.join(fields)}) {additional}"
         print(statement)
         cur.execute(statement)
     con.commit()
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     cur = con.cursor()
 
     table_name = 'users'
-    create_table(table_name, ('username', 'hashed_password', 'role'))
+    create_table(table_name, ('username unique', 'hashed_password', 'role'))
 
     if not get_user('johndoe'):
         for u in users:
