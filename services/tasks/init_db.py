@@ -20,21 +20,33 @@ if __name__ == '__main__':
     
     cur = con.cursor()
 
-    create_table('users', ('username', 'role'))
-    create_table('tasks', ('description', 'assignee', 'initial_cost', 'done_cost'))
+    create_table('users', ('username unique', 'role'))
+    create_table('tasks', ('id INTEGER PRIMARY KEY AUTOINCREMENT', 'description', 'assignee', 'initial_cost', 'done_cost', 'status'))
     
     tasks = [
-        ('mytask', 'johndoe', 10, 20),
-        ('mytask', 'johndoe', 15, 30),
-        ('mytask', 'johndoe2', 1, 1),
-        ('mytask', 'johndoe2', 2, 2),
+        (1, 'mytask', 'johndoe', 10, 20),
+        (2, 'mytask', 'johndoe', 15, 30),
+        (3, 'mytask', 'johndoe2', 1, 1),
+        (4, 'mytask', 'johndoe2', 2, 2),
 
     ]
     count = cur.execute('select count(*) from tasks').fetchone()[0]
     print(count)
     if not count:
         for t in tasks:
-            statement = f"insert into tasks values ('{t[0]}', '{t[1]}', {t[2]}, {t[3]})"
+            statement = f"insert into tasks values ({t[0]}, '{t[1]}', '{t[2]}', {t[3]}, {t[4]}, null)"
+            cur.execute(statement)
+
+    users = [
+        ('johndoe', 'parrot'),
+        ('johndoe2', 'parrot'),
+        ('manager', 'manager'),
+    ]
+    count = cur.execute('select count(*) from users').fetchone()[0]
+    print(count)
+    if not count:
+        for t in users:
+            statement = f"insert into users values ('{t[0]}', '{t[1]}')"
             cur.execute(statement)
 
     con.commit()

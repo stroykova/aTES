@@ -32,11 +32,15 @@ class TokenData(BaseModel):
 class TaskBase(BaseModel):
     description: str
 
+class DoneTask(BaseModel):
+    id: int
 
 class Task(TaskBase):
+    id: int
     assignee: str
     initial_cost: int
     done_cost: int
+    status: str | None = None
 
 
 def get_user(username: str):
@@ -96,7 +100,7 @@ async def tasks(
         statement = f"SELECT * FROM tasks"
     res = cur.execute(statement)
     result = res.fetchall()
-    return [Task(description=r[0], assignee=r[1], initial_cost=r[2], done_cost=r[3]) for r in result]
+    return [Task(id=r[0], description=r[1], assignee=r[2], initial_cost=r[3], done_cost=r[4], status=r[5]) for r in result]
     
     
 
@@ -110,7 +114,58 @@ async def create_task(
     res = cur.execute(random_statement).fetchone()[0]
     initial_cost = random.randint(-20, -10)
     done_cost = random.randint(20, 40)
-    statement = f"insert into tasks values ('{task.description}', '{res}', '{initial_cost}', '{done_cost}')"
+    statement = f"insert into tasks ('description', 'assignee', 'initial_cost', 'done_cost') values ('{task.description}', '{res}', '{initial_cost}', '{done_cost}')"
+    cur.execute(statement)
+    con.commit()
+    return 'ok'
+
+
+@app.post("/tasks/shuffle")
+async def shuffle(
+    current_user: Annotated[User, Depends(get_current_user)],
+):
+    if current_user.role not in ('manager', 'admin'):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="role",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    cur = con.cursor()
+    statement = 'SELECT username FROM users where role = "parrot";'
+    names = [n[0] for n in cur.execute(statement).fetchall()]
+    print(names)
+    statement = 'SELECT id FROM tasks'
+    ids = [n[0] for n in cur.execute(statement).fetchall()]
+    print(ids)
+    cases = ' '.join(
+        f"when {_id} then '{random.choice(names)}'" for _id in ids
+    )
+    statement = (
+        f"update tasks set assignee = case id {cases} end where id in ({','.join(str(_id) for _id in ids)})"
+    )
+    print(statement)
+    cur.execute(statement)
+    con.commit()
+    return 'ok'
+
+
+@app.post("/tasks/done")
+async def done(
+    current_user: Annotated[User, Depends(get_current_user)],
+    task: DoneTask
+):
+    if current_user.role != 'parrot':
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="role",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    cur = con.cursor()
+    statement = (
+        f"update tasks set status = 'done' where id = {task.id}"
+    )
+    print(statement)
     cur.execute(statement)
     con.commit()
     return 'ok'
