@@ -8,6 +8,7 @@ from typing import Annotated
 from pydantic import BaseModel
 from fastapi import Depends, FastAPI, HTTPException, status
 from jose import JWTError, jwt
+import random
 
 SERVICE = 'tasks'
 DB_NAME = f"{SERVICE}.db"
@@ -27,11 +28,16 @@ class TokenData(BaseModel):
     username: str | None = None
     role: str | None = None
 
-class Task(BaseModel):
+
+class TaskBase(BaseModel):
     description: str
+
+
+class Task(TaskBase):
     assignee: str
     initial_cost: int
     done_cost: int
+
 
 def get_user(username: str):
     cur = con.cursor()
@@ -94,3 +100,17 @@ async def tasks(
     
     
 
+@app.post("/tasks")
+async def create_task(
+    current_user: Annotated[User, Depends(get_current_user)],
+    task: TaskBase, 
+):
+    cur = con.cursor()
+    random_statement = 'SELECT username FROM users where role = "parrot" ORDER BY RANDOM() LIMIT 1;'
+    res = cur.execute(random_statement).fetchone()[0]
+    initial_cost = random.randint(-20, -10)
+    done_cost = random.randint(20, 40)
+    statement = f"insert into tasks values ('{task.description}', '{res}', '{initial_cost}', '{done_cost}')"
+    cur.execute(statement)
+    con.commit()
+    return 'ok'

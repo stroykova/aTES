@@ -36,7 +36,7 @@ curl -X 'POST' \
 curl -X 'GET' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MTY3Mjg3MX0.4xUItrWjdvoKeJSWWLLMLwNqC_UgnqW_b9t_BzWv8o8'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MTg1Nzc4MH0.w1VIyqIdOkU5NMk5Aktq_MNYpJOZ8iRDXnDuggUHDJU'
 
 ### manager get token
 
@@ -52,7 +52,7 @@ curl -X 'POST' \
 curl -X 'GET' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE2NzM2ODV9.mzYTXW6LKeN28BsLB5C3I5vzLXCqYkw0BJqyC26ko1M'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE4NTc4MjV9.jzyexmyUJfrymZOMJRg5ahnfpx3SDh1bs8eiZsqNXkY'
 
 
 ### kafka UI
@@ -67,3 +67,12 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{"username":"1wws1qjod2snde2z","password":"secret","role":"parrot"}'
+
+### create task
+
+curl -X 'POST' \
+  'http://tasks:8000/tasks' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE4NTczMDl9.cWvhJWvo7t7IDJtuuGwLW9EE4dWOgmSkLec7BiqPqI4'
+  -d '{"description":"desc"}'
