@@ -9,12 +9,14 @@ from pydantic import BaseModel
 from fastapi import Depends, FastAPI, HTTPException, status
 from jose import JWTError, jwt
 import random
+from kafka import KafkaProducer
+import json
 
 SERVICE = 'tasks'
 DB_NAME = f"{SERVICE}.db"
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
-
+producer = KafkaProducer(bootstrap_servers=['kafka:29092', 'kafka2:29093'], api_version=(0, 10, 1))
 app = FastAPI()
 
 con = sqlite3.connect(DB_NAME)
@@ -41,6 +43,12 @@ class Task(TaskBase):
     initial_cost: int
     done_cost: int
     status: str | None = None
+
+
+def event(topic, data):
+    print('send event:', topic, data)
+    producer.send(topic, json.dumps(data).encode('utf-8'))
+    producer.flush()
 
 
 def get_user(username: str):
@@ -117,6 +125,10 @@ async def create_task(
     statement = f"insert into tasks ('description', 'assignee', 'initial_cost', 'done_cost') values ('{task.description}', '{res}', '{initial_cost}', '{done_cost}')"
     cur.execute(statement)
     con.commit()
+    event('tasks_stream', {
+        'event_name': 'TaskCreate',
+        'data': dict(task),
+    })
     return 'ok'
 
 
@@ -146,6 +158,9 @@ async def shuffle(
     print(statement)
     cur.execute(statement)
     con.commit()
+    event('tasks_stream', {
+        'event_name': 'TaskShuffle',
+    })
     return 'ok'
 
 
@@ -168,4 +183,8 @@ async def done(
     print(statement)
     cur.execute(statement)
     con.commit()
+    event('tasks_stream', {
+        'event_name': 'TaskDone',
+        'data': dict(task),
+    })
     return 'ok'
