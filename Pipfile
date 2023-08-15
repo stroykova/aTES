@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+python-multipart = "*"
+python-jose = "*"
+passlib = "*"
+authlib = "*"
+requests = "*"
+kafka-python = "*"
 
 [dev-packages]
 
