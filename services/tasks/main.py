@@ -11,6 +11,11 @@ from jose import JWTError, jwt
 import random
 from kafka import KafkaProducer
 import json
+import uuid
+from datetime import datetime
+from schemas.schemas.tasks.TaskCreated.v1 import TaskCreatedV1, TaskV1
+from schemas.schemas.tasks.TasksShuffled.v1 import TasksShuffledV1
+from schemas.schemas.tasks.TaskDone.v1 import TaskDoneV1, TaskV1 as TaskDoneDataV1
 
 SERVICE = 'tasks'
 DB_NAME = f"{SERVICE}.db"
@@ -45,9 +50,9 @@ class Task(TaskBase):
     status: str | None = None
 
 
-def event(topic, data):
+def event(topic, data: BaseModel):
     print('send event:', topic, data)
-    producer.send(topic, json.dumps(data).encode('utf-8'))
+    producer.send(topic, data.model_dump_json().encode('utf-8'))
     producer.flush()
 
 
@@ -125,10 +130,21 @@ async def create_task(
     statement = f"insert into tasks ('description', 'assignee', 'initial_cost', 'done_cost') values ('{task.description}', '{res}', '{initial_cost}', '{done_cost}')"
     cur.execute(statement)
     con.commit()
-    event('tasks_stream', {
-        'event_name': 'TaskCreate',
-        'data': dict(task),
-    })
+
+    event(
+        'tasks_stream', 
+        TaskCreatedV1(
+            event_id=uuid.uuid4(),
+            event_version=1,
+            event_domain='tasks',
+            event_name='TaskCreated',
+            event_time=datetime.now().isoformat(),
+            producer='tasks',
+            data=TaskV1(
+                **task.model_dump()
+            ),
+        ),
+    )
     return 'ok'
 
 
@@ -158,9 +174,18 @@ async def shuffle(
     print(statement)
     cur.execute(statement)
     con.commit()
-    event('tasks_stream', {
-        'event_name': 'TaskShuffle',
-    })
+    event(
+        'tasks_stream', 
+        TasksShuffledV1(
+            event_id=uuid.uuid4(),
+            event_version=1,
+            event_domain='tasks',
+            event_name='TasksShuffled',
+            event_time=datetime.now().isoformat(),
+            producer='tasks',
+            data={},
+        ),
+    )
     return 'ok'
 
 
@@ -183,8 +208,16 @@ async def done(
     print(statement)
     cur.execute(statement)
     con.commit()
-    event('tasks_stream', {
-        'event_name': 'TaskDone',
-        'data': dict(task),
-    })
+    event(
+        'tasks_stream', 
+        TaskDoneV1(
+            event_id=uuid.uuid4(),
+            event_version=1,
+            event_domain='tasks',
+            event_name='TaskDone',
+            event_time=datetime.now().isoformat(),
+            producer='tasks',
+            data=TaskDoneDataV1(**task.model_dump()),
+        ),
+    )
     return 'ok'
