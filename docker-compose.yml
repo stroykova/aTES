@@ -6,6 +6,7 @@ services:
       context: .
     volumes:
       - ./services/sso:/usr/src/services/sso
+      - ./services/schemas:/usr/src/services/sso/schemas
       - ./.venv:/usr/src/.venv
     working_dir: /usr/src/
     command: bash -c "cd services/sso && pipenv run python init_db.py && pipenv run python -m uvicorn main:app --host 0.0.0.0 --reload"
@@ -18,6 +19,7 @@ services:
       context: .
     volumes:
       - ./services/tasks:/usr/src/services/tasks
+      - ./services/schemas:/usr/src/services/tasks/schemas
       - ./.venv:/usr/src/.venv
     working_dir: /usr/src/
     command: bash -c "cd services/tasks && pipenv run python init_db.py && pipenv run python -m uvicorn main:app --host 0.0.0.0 --reload"
@@ -30,6 +32,7 @@ services:
       context: .
     volumes:
       - ./services/tasks:/usr/src/services/tasks
+      - ./services/schemas:/usr/src/services/tasks/schemas
       - ./.venv:/usr/src/.venv
     working_dir: /usr/src/
     command: bash -c "cd services/tasks && pipenv run python consumer.py"

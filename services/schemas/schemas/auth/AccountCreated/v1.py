@@ -8,8 +8,9 @@ EVENT_VERSION = 1
 
 
 class Event(BaseModel):
-    event_id: UUID = Field(..., min_length=1)
+    event_id: UUID
     event_version: Literal[1]
+    event_domain: Literal['auth']
     event_name: str = Field(..., min_length=1)
     event_time: str = Field(..., min_length=1)  # format???
     producer: str = Field(..., min_length=1)
@@ -26,9 +27,12 @@ class AccountCreatedV1(Event):
     data: UserV1
 
 
+EVENT_CLASS = AccountCreatedV1
+
+
 if __name__ == '__main__':
-    file_path = pathlib.Path(__file__).parent / f'{EVENT_VERSION}.json'
+    file_path = pathlib.Path(__file__).parent / f'v{EVENT_VERSION}.json'
     print(file_path)
     with open(file_path, 'w') as f:
-        print(AccountCreatedV1.model_json_schema())
-        json.dump(AccountCreatedV1.model_json_schema(), f, indent=4)
+        print(EVENT_CLASS.model_json_schema())
+        json.dump(EVENT_CLASS.model_json_schema(), f, indent=4)

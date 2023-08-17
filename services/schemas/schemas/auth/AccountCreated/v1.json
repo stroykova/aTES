@@ -35,6 +35,10 @@
             "const": 1,
             "title": "Event Version"
         },
+        "event_domain": {
+            "const": "auth",
+            "title": "Event Domain"
+        },
         "event_name": {
             "const": "AccountCreated",
             "title": "Event Name"
@@ -56,6 +60,7 @@
     "required": [
         "event_id",
         "event_version",
+        "event_domain",
         "event_name",
         "event_time",
         "producer",
