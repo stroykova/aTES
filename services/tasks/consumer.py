@@ -24,3 +24,4 @@ while True:
             cur = con.cursor()
             cur.execute(statement)
             con.commit()
+        

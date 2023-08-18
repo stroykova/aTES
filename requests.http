@@ -74,7 +74,7 @@ curl -X 'POST' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTIzMDYxMTl9.PU14SlpSTllr5-wrj-BiveRcog-RveeXD-_RIMr5K2g'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTIzOTQ4NTB9.c_dz3IAIYcid57XcINlMtnVXt6T_Ykk0csKOwalUlKY'
   -d '{"description":"desc"}'
 
 ### shuffle tasks

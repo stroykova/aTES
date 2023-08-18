@@ -4,7 +4,7 @@ import pathlib
 from typing import Literal
 import json
 
-EVENT_VERSION = 1
+EVENT_VERSION = 2
 
 
 class Event(BaseModel):
@@ -17,20 +17,17 @@ class Event(BaseModel):
     data: dict
 
 
-class TaskV1(BaseModel):
-    description: str = Field(..., min_length=1)
-    assignee: str = Field(..., min_length=1)
-    initial_cost: int
-    done_cost: int
-    id: int
+class TaskV2(BaseModel):
+    title: str
+    jira_id: str = Field(pattern=r"^[^\[\]]+$")
 
 
-class TaskCreatedV1(Event):
+class TaskCreatedV2(Event):
     event_name: Literal['TaskCreated']
-    data: TaskV1
+    data: TaskV2
 
 
-EVENT_CLASS = TaskCreatedV1
+EVENT_CLASS = TaskCreatedV2
 
 
 if __name__ == '__main__':

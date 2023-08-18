@@ -37,6 +37,31 @@ services:
     working_dir: /usr/src/
     command: bash -c "cd services/tasks && pipenv run python consumer.py"
 
+  accounting:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./services/accounting:/usr/src/services/accounting
+      - ./services/schemas:/usr/src/services/accounting/schemas
+      - ./.venv:/usr/src/.venv
+    working_dir: /usr/src/
+    command: bash -c "cd services/accounting && pipenv run python init_db.py && pipenv run python -m uvicorn main:app --host 0.0.0.0 --reload"
+    ports:
+      - 8002:8000
+
+  accounting_consumer:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./services/accounting:/usr/src/services/accounting
+      - ./services/schemas:/usr/src/services/accounting/schemas
+      - ./.venv:/usr/src/.venv
+    working_dir: /usr/src/
+    command: bash -c "cd services/accounting && pipenv run python consumer.py"
+
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:

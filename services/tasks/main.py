@@ -141,7 +141,11 @@ async def create_task(
             event_time=datetime.now().isoformat(),
             producer='tasks',
             data=TaskV1(
-                **task.model_dump()
+                **task.model_dump(),
+                assignee=res, 
+                initial_cost=initial_cost,
+                done_cost=done_cost,
+                id=cur.lastrowid,
             ),
         ),
     )
