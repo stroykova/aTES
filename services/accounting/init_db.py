@@ -22,3 +22,10 @@ if __name__ == '__main__':
     cur = con.cursor()
     create_table('users', ('username unique',))
     create_table('tasks', ('id INTEGER PRIMARY KEY', 'description', 'assignee', 'initial_cost', 'done_cost', 'status'))
+
+    migration1 = f"alter table tasks add column title"
+    migration2 = f"alter table tasks add column jira_id"
+    cur.execute(migration1)
+    cur.execute(migration2)
+
+    con.commit()

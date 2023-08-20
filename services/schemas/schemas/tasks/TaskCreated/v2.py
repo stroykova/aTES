@@ -9,7 +9,7 @@ EVENT_VERSION = 2
 
 class Event(BaseModel):
     event_id: UUID
-    event_version: Literal[1]
+    event_version: Literal[2]
     event_domain: Literal['tasks']
     event_name: str = Field(..., min_length=1)
     event_time: str = Field(..., min_length=1)  # format???
@@ -20,6 +20,10 @@ class Event(BaseModel):
 class TaskV2(BaseModel):
     title: str
     jira_id: str = Field(pattern=r"^[^\[\]]+$")
+    assignee: str = Field(..., min_length=1)
+    initial_cost: int
+    done_cost: int
+    id: int
 
 
 class TaskCreatedV2(Event):

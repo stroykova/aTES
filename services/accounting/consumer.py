@@ -3,6 +3,7 @@ from main import con
 import time
 import json
 from schemas.schemas.tasks.TaskCreated.v1 import TaskCreatedV1, TaskV1
+from schemas.schemas.tasks.TaskCreated.v2 import TaskCreatedV2, TaskV2
 from schemas.check import check_event
 
 print('consumer connected')
@@ -21,6 +22,17 @@ while True:
             statement = (
                 "insert into tasks (id, description, assignee, initial_cost, done_cost) "
                 f"values ('{task_data.id}', '{task_data.description}', '{task_data.assignee}', '{task_data.initial_cost}', '{task_data.done_cost}')"
+            )
+            print(statement)
+            cur = con.cursor()
+            cur.execute(statement)
+            con.commit()
+        elif data['event_name'] == 'TaskCreated' and data['event_version'] == 2:
+            task_event = TaskCreatedV2(**data)
+            task_data = task_event.data
+            statement = (
+                "insert into tasks (id, jira_id, title, assignee, initial_cost, done_cost) "
+                f"values ('{task_data.id}', '{task_data.jira_id}', '{task_data.title}', '{task_data.assignee}', '{task_data.initial_cost}', '{task_data.done_cost}')"
             )
             print(statement)
             cur = con.cursor()

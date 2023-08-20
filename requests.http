@@ -52,7 +52,7 @@ curl -X 'POST' \
 curl -X 'GET' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTE4NjU0NTV9.VIqP8D6uiCAnHMglN58b8ZSM-qGqIwEKK1TK83MfdQU'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTI1NDU0ODZ9.56TXBVrcg4S7DRgGU9CixlxT6ohLHnBtnnWbRHu92TE'
 
 
 ### kafka UI
@@ -74,8 +74,17 @@ curl -X 'POST' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTIzOTQ4NTB9.c_dz3IAIYcid57XcINlMtnVXt6T_Ykk0csKOwalUlKY'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTI1NDM2Mjh9.z-LPULol0GW9dxwKhxcRTzBxunzdyisFG1_U3vPzxO4'
   -d '{"description":"desc"}'
+
+### create task v2
+
+curl -X 'POST' \
+  'http://tasks:8000/tasks' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTI1NDM2Mjh9.z-LPULol0GW9dxwKhxcRTzBxunzdyisFG1_U3vPzxO4'
+  -d '{"title":"title", "jira_id": "jira_id"}'
 
 ### shuffle tasks
 
