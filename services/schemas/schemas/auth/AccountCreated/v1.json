@@ -1,0 +1,71 @@
+{
+    "$defs": {
+        "UserV1": {
+            "properties": {
+                "username": {
+                    "minLength": 1,
+                    "title": "Username",
+                    "type": "string"
+                },
+                "role": {
+                    "enum": [
+                        "parrot",
+                        "manager",
+                        "admin"
+                    ],
+                    "title": "Role",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "username",
+                "role"
+            ],
+            "title": "UserV1",
+            "type": "object"
+        }
+    },
+    "properties": {
+        "event_id": {
+            "format": "uuid",
+            "title": "Event Id",
+            "type": "string"
+        },
+        "event_version": {
+            "const": 1,
+            "title": "Event Version"
+        },
+        "event_domain": {
+            "const": "auth",
+            "title": "Event Domain"
+        },
+        "event_name": {
+            "const": "AccountCreated",
+            "title": "Event Name"
+        },
+        "event_time": {
+            "minLength": 1,
+            "title": "Event Time",
+            "type": "string"
+        },
+        "producer": {
+            "minLength": 1,
+            "title": "Producer",
+            "type": "string"
+        },
+        "data": {
+            "$ref": "#/$defs/UserV1"
+        }
+    },
+    "required": [
+        "event_id",
+        "event_version",
+        "event_domain",
+        "event_name",
+        "event_time",
+        "producer",
+        "data"
+    ],
+    "title": "AccountCreatedV1",
+    "type": "object"
+}

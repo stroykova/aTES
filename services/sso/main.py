@@ -1,4 +1,6 @@
 import sqlite3
+import uuid
+from datetime import datetime
 from typing import Annotated
 from fastapi import FastAPI
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -9,7 +11,7 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from kafka import KafkaProducer
 import json
-
+from schemas.schemas.auth.AccountCreated.v1 import AccountCreatedV1, UserV1
 
 producer = KafkaProducer(bootstrap_servers=['kafka:29092', 'kafka2:29093'], api_version=(0, 10, 1))
 
@@ -29,9 +31,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def event(topic, data):
+def event(topic, data: BaseModel):
     print('send event:', topic, data)
-    producer.send(topic, json.dumps(data).encode('utf-8'))
+    producer.send(topic, data.model_dump_json().encode('utf-8'))
     producer.flush()
 
 
@@ -90,8 +92,6 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-    # test event
-    event('new_jwt_token', to_encode)
     return encoded_jwt
 
 
@@ -149,8 +149,19 @@ async def register(u: UserRegister):
     cur = con.cursor()
     cur.execute(statement)
     con.commit()
-    event('accounts_stream', {
-        'event_name': 'AccountCreated',
-        'data': dict(User(username=u.username, role=u.role)),
-    })
+    event(
+        'accounts_stream', 
+        AccountCreatedV1(
+            event_id=uuid.uuid4(),
+            event_version=1,
+            event_domain='auth',
+            event_name='AccountCreated',
+            event_time=datetime.now().isoformat(),
+            producer='sso',
+            data=UserV1(
+                username=u.username, 
+                role=u.role
+            ),
+        ),
+    )
     return 'ok'

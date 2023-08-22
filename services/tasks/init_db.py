@@ -49,4 +49,10 @@ if __name__ == '__main__':
             statement = f"insert into users values ('{t[0]}', '{t[1]}')"
             cur.execute(statement)
 
+
+    migration1 = f"alter table tasks add column title"
+    migration2 = f"alter table tasks add column jira_id"
+    cur.execute(migration1)
+    cur.execute(migration2)
+    
     con.commit()
