@@ -11,7 +11,7 @@ jobs_done = 0
 total_time = 0
 while True:
     time.sleep(1)
-    consumer = KafkaConsumer('tasks_stream',
+    consumer = KafkaConsumer('tasks_stream', 'accounts_stream',
                              bootstrap_servers=['kafka:29092', 'kafka2:29093'], api_version=(0, 10, 1))
     for message in consumer:
         data = json.loads(message.value.decode('utf-8'))
@@ -24,8 +24,11 @@ while True:
                 f"values ('{task_data.id}', '{task_data.description}', '{task_data.assignee}', '{task_data.initial_cost}', '{task_data.done_cost}')"
             )
             print(statement)
+            statement2 = f"update users set balance = balance + {task_data.initial_cost} where username = {task_data.assignee}"
+            print(statement2)
             cur = con.cursor()
             cur.execute(statement)
+            cur.execute(statement2)
             con.commit()
         elif data['event_name'] == 'TaskCreated' and data['event_version'] == 2:
             task_event = TaskCreatedV2(**data)
@@ -34,6 +37,17 @@ while True:
                 "insert into tasks (id, jira_id, title, assignee, initial_cost, done_cost) "
                 f"values ('{task_data.id}', '{task_data.jira_id}', '{task_data.title}', '{task_data.assignee}', '{task_data.initial_cost}', '{task_data.done_cost}')"
             )
+            print(statement)
+            statement2 = f"update users set balance = balance + {task_data.initial_cost} where username = '{task_data.assignee}'"
+            print(statement2)
+            cur = con.cursor()
+            cur.execute(statement)
+            cur.execute(statement2)
+            con.commit()
+        elif data['event_name'] == 'AccountCreated' and data['event_version'] == 1:
+            d = data['data']
+            username = d["username"]
+            statement = f"insert into users (username) values ('{username}')"
             print(statement)
             cur = con.cursor()
             cur.execute(statement)

@@ -52,7 +52,7 @@ curl -X 'POST' \
 curl -X 'GET' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTI1NDU0ODZ9.56TXBVrcg4S7DRgGU9CixlxT6ohLHnBtnnWbRHu92TE'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MzEzODA1MX0.Rpb0F98qEbtJNx0f_RZwHwTBdRKD5Pu9r1NmpneLA04'
 
 
 ### kafka UI
@@ -66,7 +66,7 @@ curl -X 'POST' \
   'http://sso:8000/register' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"username":"1wds1sdwqjods2snde2z","password":"secret","role":"parrot"}'
+  -d '{"username":"1s1sdwqjodsnde2z","password":"secret","role":"parrot"}'
 
 ### create task
 
@@ -83,7 +83,7 @@ curl -X 'POST' \
   'http://tasks:8000/tasks' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTI1NDM2Mjh9.z-LPULol0GW9dxwKhxcRTzBxunzdyisFG1_U3vPzxO4'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hZ2VyIiwicm9sZSI6Im1hbmFnZXIiLCJleHAiOjE2OTMxMzc0Nzh9.6wUNpXMOJGOofGf2SxN7lV3o4MBICm5eTDTK_oZN2Fs'
   -d '{"title":"title", "jira_id": "jira_id"}'
 
 ### shuffle tasks
@@ -103,3 +103,10 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwicm9sZSI6InBhcnJvdCIsImV4cCI6MTY5MjMwNjgzNH0.hhGzc-AxyR8sIXU_V-ebllvwu0xV4ilM5p0PCqADBb8'
   -d '{"id":4}'
+
+### balance
+
+
+curl 'http://accounting:8000/users' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' 
